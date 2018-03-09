@@ -11,8 +11,7 @@
 @import "node_modules/bootstrap/scss/grid";
 @import "node_modules/bootstrap/scss/alert";
 @import "node_modules/bootstrap/scss/buttons";
-@import "node_modules/bootstrap/scss/utilities/float";
-@import "node_modules/bootstrap/scss/utilities/display";
+@import "node_modules/bootstrap/scss/utilities";
 
 
 // Styling
@@ -20,59 +19,62 @@
     box-sizing: border-box;
 }
 body{
-    background: #1D2323;
-    color: #FFCC33;
+    background: #E9E9E8;
+    color: #515AA3;
+    max-width: 100%;
 }
-h1{
-    text-align: cen;
-    margin-top: 10%;
-    letter-spacing: 2px;
+header{
+    position: relative;
 }
 .main-header{
-    padding-top: 2%;
+    /* The image used */
+    background-image: url(../../images/campbells_007.jpg);
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.cart,img{
+    width: 10%;
+}
+.logo{
+    text-align: center;
+}
+h2{
+    font-size: 3em;
+    padding-top: 104px;
+    text-align: center;
+}
+.img-100{
+    width: 100%;
+}
+.logo img{
     width: 20%;
-    margin: 0 auto;
+    top: 350px;
+    position: relative;
 }
-.image-spin{
-    -webkit-animation-name: spin;
-    -webkit-animation-duration: 1500ms;
-    -webkit-animation-iteration-count: forwards;
-    -webkit-animation-timing-function: cubic-bezier(0, 1.15, 1, 0.07);
-    
-    -moz-animation-name: spin;
-    -moz-animation-duration: 1500ms;
-    -moz-animation-iteration-count: forwards;
-    -moz-animation-timing-function: cubic-bezier(0, 1.15, 1, 0.07);
-
-    -ms-animation-name: spin;
-    -ms-animation-duration: 1500ms;
-    -ms-animation-iteration-count: forwards;
-    -ms-animation-timing-function: cubic-bezier(0, 1.15, 1, 0.07);
-
-    transform-origin: center;
-
-    animation-name: spin;
-    animation-duration: 1500ms;
-    animation-iteration-count: forwards;
-    animation-timing-function: cubic-bezier(0, 1.15, 1, 0.07);
+p{
+    padding-top: 16px;
 }
-@-ms-keyframes spin {
-    from { -ms-transform: rotate(0deg); }
-    to { -ms-transform: rotate(360deg); }
+.products .btn-underline p{
+    color: #515AA3;
+    font-size: 1.5em;
+    padding-top: 16px;
 }
-@-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
+.products button{
+    background: none;
+    border: none;
+    margin-right: 104px;
+    border-radius: 1px;
+    height: 70px;
+    border-bottom: 1px solid #515AA3;
 }
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
-}
-@keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
+footer{
+    background: #EDEDED;
+    text-align: center;
+    padding: 1%;
 }
