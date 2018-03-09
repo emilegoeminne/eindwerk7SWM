@@ -1,0 +1,29 @@
+{
+  "name": "webshopeindwerk",
+  "version": "1.0.0",
+  "description": "Webshop eindwerk 7SWM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Emile",
+    "Goeminne",
+    "7SWM",
+    "Eindwerk",
+    "Webshop"
+  ],
+  "author": "Emile Goeminne",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0"
+  }
+}
