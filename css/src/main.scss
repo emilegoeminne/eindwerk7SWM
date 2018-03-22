@@ -27,6 +27,11 @@ body{
 header{
     position: relative;
 }
+video{
+    position: absolute;
+    max-width: 100%;
+    z-index: -100;
+}
 .main-header{
     /* Full height */
     height: 100%; 
@@ -36,6 +41,7 @@ header{
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 64px;
+    z-index: 99;
 }
 img.cart{
     width: 5%;
@@ -67,6 +73,86 @@ h2{
 p{
     padding-top: 16px;
 }
+
+.sidenav {
+    font-family: sans-serif;
+        text-transform: uppercase;
+      height: 100%;
+      /* 100% Full-height */
+      width: 0;
+      /* 0 width - change this with JavaScript */
+      position: fixed;
+      /* Stay in place */
+      z-index: 10000;
+      /* Stay on top */
+      top: 0;
+      right: 0;
+      background-color: black;
+      /* Black*/
+      overflow-x: hidden;
+      /* Disable horizontal scroll */
+      padding-top: 60px;
+      /* Place content 60px from the top */
+      transition: 0.5s;
+      /* 0.5 second transition effect to slide in the sidenav */
+   
+  }
+  /* The navigation menu links */
+  .sidenav a {
+          margin: 20px 0 0px 0;
+      text-decoration: none;
+      font-size: 25px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+      width: 227px;
+  text-align: -webkit-center;
+  }
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover, .offcanvas a:focus {
+      color: #f1f1f1;
+  }
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: -13px;
+    right: 32px;
+    font-size: 38px;
+    margin-left: 50px;
+    width: initial;
+  }
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+      transition: margin-left .5s;
+      padding: 20px;
+  }
+  .sub-nav {
+    color: white;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s;
+  text-decoration: none;
+  margin: 0 12px 0 12px;
+  }
+  .sub-nav:hover {
+      color: #C0212A;
+      /* text-decoration: underline; */
+    
+  }
+  .hamburger-icon {
+        font-size: 32px;
+        color: black;
+        text-decoration: none;
+        position: fixed;
+        z-index: 1000;
+        right: 29px;
+        top: 9px;
+        cursor: pointer;
+        display: inherit;
+    }
+
 .btn-underline p{
     border-bottom: 1px solid #515AA3;
     color: #515AA3;
