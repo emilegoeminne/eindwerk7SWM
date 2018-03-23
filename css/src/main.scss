@@ -48,14 +48,19 @@ img.cart{
     float: left;
     padding-top: 15px;
 }
+img.btnCart{
+    width: 20%;
+    float: left;
+    padding-top: 15px;
+}
 .buy{
     font-size: 1.5em;
     float: left;
     padding-top : 0;
 }
-
 .logo{
     text-align: center;
+    margin: 0 auto;
 }
 h2{
     font-size: 3em;
@@ -66,12 +71,18 @@ h2{
     width: 100%;
 }
 .logo img{
-    width: 20%;
-    top: 326px;
+    width: 4%;
+    top: 64px;
+    margin-left: auto;
+    margin-right: auto;
     position: relative;
 }
 p{
     padding-top: 16px;
+}
+.container{
+    position: relative;
+    padding-top: 64px;
 }
 
 .sidenav {
@@ -87,7 +98,7 @@ p{
       /* Stay on top */
       top: 0;
       right: 0;
-      background-color: black;
+      background-color: #515AA3;
       /* Black*/
       overflow-x: hidden;
       /* Disable horizontal scroll */
@@ -99,14 +110,12 @@ p{
   }
   /* The navigation menu links */
   .sidenav a {
-          margin: 20px 0 0px 0;
-      text-decoration: none;
-      font-size: 25px;
-      color: white;
-      display: block;
-      transition: 0.3s;
-      width: 227px;
-  text-align: -webkit-center;
+        text-decoration: none;
+        font-size: 25px;
+        color: #E9E9E8;
+        display: block;
+        transition: 0.3s;
+        width: 227px;
   }
   /* When you mouse over the navigation links, change their color */
   .sidenav a:hover, .offcanvas a:focus {
@@ -124,7 +133,7 @@ p{
   /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
   #main {
       transition: margin-left .5s;
-      padding: 20px;
+      padding: 1%;
   }
   .sub-nav {
     color: white;
@@ -141,27 +150,26 @@ p{
       /* text-decoration: underline; */
     
   }
+  ul li{
+      list-style-type: none;
+  }
   .hamburger-icon {
         font-size: 32px;
-        color: black;
+        color: #515AA3;
         text-decoration: none;
         position: fixed;
-        z-index: 1000;
+        z-index: 1;
         right: 29px;
-        top: 9px;
+        top: 64px;
         cursor: pointer;
         display: inherit;
     }
-
-.btn-underline p{
+.btn-underline a{
     border-bottom: 1px solid #515AA3;
     color: #515AA3;
     float: left;
 }
-.products .btn-underline p{
-    font-size: 1.5em;
-    padding-top: 16px;
-}
+
 button{
     background: none;
     border: none;
@@ -172,8 +180,26 @@ button{
     margin-right: 104px;
     
 }
+.btn:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  .btn{
+      padding: 0 16px 0 0;
+  }
+.btnInfo{
+    position: relative;
+    left: 0;
+}
+
 footer{
     background: #EDEDED;
+    padding: 1rem;
     text-align: center;
-    padding: 1%;
+}
+.footerBottom{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
