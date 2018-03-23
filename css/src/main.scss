@@ -121,6 +121,9 @@ p{
   .sidenav a:hover, .offcanvas a:focus {
       color: #f1f1f1;
   }
+  a:hover{
+    text-decoration: none;
+  }
   /* Position and style the close button (top right corner) */
   .sidenav .closebtn {
     position: absolute;
@@ -147,7 +150,6 @@ p{
   }
   .sub-nav:hover {
       color: #C0212A;
-      /* text-decoration: underline; */
     
   }
   ul li{
@@ -169,7 +171,9 @@ p{
     color: #515AA3;
     float: left;
 }
-
+.smallIcon .col img{
+    width: 50%;
+}
 button{
     background: none;
     border: none;
@@ -191,7 +195,27 @@ button{
     position: relative;
     left: 0;
 }
-
+h3{
+    font-size: 4rem;
+}
+form input,textarea{
+    width: 100%;
+    border: 1px solid#E9E9E8;
+    border-radius: 8px;
+    padding: 2%;
+}
+.formSubmit{
+    text-align: center;
+    font-size: 150%;
+}
+.formSubmit a{
+    font-size: 2rem;
+}
+.alert-light{
+    background: none;
+    border: none;
+    color: #D3D3D3;
+}
 footer{
     background: #EDEDED;
     padding: 1rem;
@@ -202,4 +226,14 @@ footer{
     right: 0;
     bottom: 0;
     left: 0;
+}
+.row+.row{
+    padding-top: 16px;
+}
+.blueUnderline{
+    border-bottom: 4px solid rgb(214, 218, 255);
+    border-radius: 10px;
+}
+.container{
+    padding-top: 128px;
 }
