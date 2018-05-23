@@ -25,9 +25,9 @@
                         <a href="#" class="closebtn" id="btnCloseNav">&times;</a>
                         <div class="mobile-menu-items">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="products.html">Producten</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="index.php">Home</a></li>
+                                <li><a href="products.php">Producten</a></li>
+                                <li><a href="contact.php">Contact</a></li>
                                 <li><img src="images/cart.png" class="cart" alt="Winkelmand voor knop Koop nu"><button type="button" class="btnUnderline"><a class="buy">Koop nu</a></button></li>
                             </ul>
                             <div class="socials">
@@ -43,57 +43,34 @@
         </header>
 
         <div class="container">
+            <h2>Producten</h2>
             <div class="row">
                 <div class="col">
                     <img class="img-100" src="images/fles_geel.png" alt="Fles van de smaak Banaan">
                 </div>
                 <div class="col">
-                    <div class="row">
-                        <h3 class="blueUnderline">Banaan</h3>
-                    </div>
-                    <div class="row">
-                        <p>
-                        Verkrijg nu de lekkere en frisse banaan versie ze geeft je een fris en 
-                        lekkere smaak klaar om je dag door te gaan Nu verkrijgbaar in winkels bij 
-                        jou in de buurt!
-                        </p>
-                    </div>
-                    <div class="row smallIcon">
-                        <div class="col">
-                            <img src="images/icons/gum.svg" alt="">
-                        </div>
-                        <div class="col">
-                            <img src="images/icons/flask.svg" alt="">
-                        </div>
-                        <div class="col">
-                            <img src="images/icons/care.svg" alt="">
-                        </div>
-                        <div class="col">
-                            <img src="images/icons/leaf.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p>Natuurlijke suikers</p>
-                        </div>
-                        <div class="col">
-                            <p>Geen chemishe troep</p>
-                        </div>
-                        <div class="col">
-                            <p>Gezond!</p>
-                        </div>
-                        <div class="col">
-                            <p>Altijd vers</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <h3>€7.99</h3>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn btn-underline"><a href="" class="">Verzend</a></button>
-                    </div>
+                    <img class="img-100" src="images/fles_blauw.png" alt="Fles van de smaak Banaan">
                 </div>
-                
+                <div class="col">
+                    <img class="img-100" src="images/fles_green.png" alt="Fles van de smaak Banaan">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col btnInfo">
+                    <h3>Banaan</h3>
+                    <button type="button" class="btn btn-underline"><a href="" class="">Bestel</a></button>
+                    <button type="button" class="btn btn-underline"><a href="product/banaan.php" class="">Meer Info</a></button>
+                </div>
+                <div class="col btnInfo">
+                    <h3>Druif</h3>
+                    <button type="button" class="btn btn-underline"><a href="" class="">Bestel</a></button>
+                    <button type="button" class="btn btn-underline"><a href="product/druif.php" class="">Meer Info</a></button>
+                </div>
+                <div class="col btnInfo">
+                    <h3>Appel</h3>
+                    <button type="button" class="btn btn-underline"><a href="#" class="">Bestel</a></button>
+                    <button type="button" class="btn btn-underline"><a href="product/appel.php" class="">Meer Info</a></button>
+                </div>
             </div>
         </div>
         <footer class="footerBottom">

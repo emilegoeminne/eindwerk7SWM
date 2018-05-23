@@ -23,6 +23,7 @@ body{
     background: #E9E9E8;
     color: #515AA3;
     max-width: 100%;
+    position: relative;
 }
 header{
     position: relative;
@@ -64,8 +65,10 @@ img.btnCart{
 }
 h2{
     font-size: 3em;
-    padding-top: 104px;
     text-align: center;
+}
+.page-main>h2{
+    padding-top: 104px
 }
 .img-100{
     width: 100%;
@@ -216,16 +219,31 @@ form input,textarea{
     border: none;
     color: #D3D3D3;
 }
+
+/* ORDER PAGE */
+
+.order-navigation{
+    width: 10%;
+}
+.order-navigation .order-navigation__circle{
+    padding: 0;
+    margin: 0;
+    background: rgba($color: #515AA3, $alpha: 0.2);
+    border-radius: 100%;
+}
+
+
+/* ORDER PAGE */
+
+
 footer{
     background: #EDEDED;
     padding: 1rem;
     text-align: center;
-}
-.footerBottom{
     position: absolute;
-    right: 0;
-    bottom: 0;
     left: 0;
+    bottom: 0;
+    width: 100%;
 }
 .row+.row{
     padding-top: 16px;
@@ -236,4 +254,5 @@ footer{
 }
 .container{
     padding-top: 128px;
+    min-height: 100%;
 }
