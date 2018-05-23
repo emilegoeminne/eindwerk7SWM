@@ -15,3 +15,14 @@ function openNav() {
   document.getElementById("btnOpenNav").addEventListener("click", function(event){
     openNav();
   });
+
+  $(document).ready(function(){
+    $("#remove").on('click',function(){
+        var toRemove=$('#toRemove').val();
+        $.ajax('goToRemove.php',{
+            data:{"toRemove":toRemove}
+        });
+
+
+    });
+});
