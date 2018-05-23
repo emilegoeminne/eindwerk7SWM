@@ -67,6 +67,7 @@
                 </div>
             </div>
         </header>
+        <div class="container">
             <H2>Register</h2>
             <form method="post" action="add_user.php">
                 <label for="naam">Naam</label>
@@ -84,6 +85,10 @@
                 <input type="submit">
             
             </form>
+        </div>
+        <footer>
+            <p>&copy; <?php echo date("Y");?> VISO Mariakerke</p>
+        </footer>
     </body>
 </html>
 
@@ -96,5 +101,6 @@
     }
 ?>
         </div>
+        <script src="../js/dist/main.min.js"></script>
     </body>
-<html>
+</html>

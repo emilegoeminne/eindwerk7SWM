@@ -100,16 +100,18 @@
             </div>
         </header>
         <main>
-        <H2>Admin login</h2>
-        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
-            <label for="name">Naam : </label>
-            <input type="text" name="username" placeholder="Naam" autofocus required />
-            <input type="password" name="password" placeholder="Wachtwoord" required />
-            <input type="hidden" name="rank" placeholder="" />
-            <input type="submit" name="Submit" value="Submit!" />
-        </form>
-        <a href="register.php">Registreer</a>     
-        </main>
+        <div class="container">
+            <H2>Admin login</h2>
+            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
+                <label for="name">Naam : </label>
+                <input type="text" name="username" placeholder="Naam" autofocus required />
+                <input type="password" name="password" placeholder="Wachtwoord" required />
+                <input type="hidden" name="rank" placeholder="" />
+                <input type="submit" name="Submit" value="Submit!" />
+            </form>
+            <a href="register.php">Registreer</a>     
+            </main>
+        </div>
         
         <footer>
             <p>&copy; <?php echo date("Y");?> VISO Mariakerke</p>
@@ -122,5 +124,6 @@
     $conn->close(); 
     ?>
         </div>
+        <script src="../js/dist/main.min.js"></script>
     </body>
-<html>
+</html>

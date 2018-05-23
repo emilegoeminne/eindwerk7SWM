@@ -66,20 +66,23 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
                     if (mysqli_num_rows($result) > 0) {
                             while ($rij = mysqli_fetch_array($result)) {
                                 ?>
-                                <div class="row left-float">
-                                        <?php
-                                        echo "
-                                            <div class=\"col\">
-                                                <img class='img-100' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak {$rij['naam']}\" >
-                                            </div>";
-
-                                        echo "        
-                                            <div class='btnInfo'>
-                                                <h3>{$rij['naam']}</h3>
-                                                <button type=\"button\" class=\"btn btn-underline\"><a href=\"order-creation.php\">Bestel</a></button>
-                                                <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
-                                            </div>";
-                                        ?>
+                                <div class="row">
+                                <?php
+                                echo "
+                                    <div class=\"col\">
+                                        <img class='img-100' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak {$rij['naam']}\" >
+                                    </div>";
+                                ?>
+                                </div>
+                                <div class="row">
+                                <?php
+                                echo "        
+                                    <div class='col btnInfo'>
+                                        <h3>{$rij['naam']}</h3>
+                                        <button type=\"button\" class=\"btn btn-underline\"><a href=\"order-creation.php\">Bestel</a></button>
+                                        <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
+                                    </div>";
+                                ?>
                                 </div>
                                 <?php
                             }
