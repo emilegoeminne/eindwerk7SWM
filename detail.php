@@ -72,54 +72,55 @@ session_start();
                 </div>
             </div>
         </header>
-<?php
+        <div class="container-fluid row">
+            <?php
 
-//stap 1b: bestand db_conn.php insluiten
-include("includes/db_conn.php");
-
-
-// stap 2: De query opstellen en uitvoeren
-
-$query = "SELECT * FROM producten WHERE product_id=".$_GET["product_id"];
-
-if (!$result = mysqli_query($conn,$query)) {
-    echo "FOUT: Query kon niet uitgevoerd worden"; 
-	exit;
-}
+            //stap 1b: bestand db_conn.php insluiten
+            include("includes/db_conn.php");
 
 
-// stap 3: De resultaten naar het scherm schrijven
-while ($rij = mysqli_fetch_array($result)) {
-    echo "
-    <div class='row align-items-center'>
-        <div class=\"col\">
-            <img class='img-100' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak Banaan\" >
-        </div>
+            // stap 2: De query opstellen en uitvoeren
 
-        <div class='col products'>
-            <h3>{$rij['naam']}</h3>
-            <p>{$rij['description']}</p>
-            <form method=\"post\" action=\"add_to_cart.php\">
-                <label for=\"amount\">Amount</label>
-                <input type=\"number\" name=\"amount\" value=\"amount\" required >*
-                <input type=\"hidden\" name=\"product_id\" value=\"{$rij['product_id']}\" >
-                <input type=\"hidden\" name=\"name\" value=\"{$rij['naam']}\" >
-                <input type=\"submit\" name=\"toevoegen\" value=\"Toevoegen\">
-            </form>
-            <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
-        </div>
-    </div>";
+            $query = "SELECT * FROM producten WHERE product_id=".$_GET["product_id"];
 
-}
+            if (!$result = mysqli_query($conn,$query)) {
+                echo "FOUT: Query kon niet uitgevoerd worden"; 
+                exit;
+            }
 
 
-// stap 4: De verbinding met de database sluiten  
+            // stap 3: De resultaten naar het scherm schrijven
+            while ($rij = mysqli_fetch_array($result)) {
+                echo "
+                <div class='row align-items-center'>
+                    <div class=\"col\">
+                        <img class='img-100' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak Banaan\" >
+                    </div>
 
-if (!mysqli_close($conn)) {
-    echo "FOUT: De verbinding kon niet worden gesloten"; 
-    exit;
-} 
-?>
+                    <div class='col products'>
+                        <h3>{$rij['naam']}</h3>
+                        <p>{$rij['description']}</p>
+                        <form method=\"post\" action=\"add_to_cart.php\">
+                            <label for=\"amount\">Amount</label>
+                            <input type=\"number\" name=\"amount\" value=\"amount\" required >*
+                            <input type=\"hidden\" name=\"product_id\" value=\"{$rij['product_id']}\" >
+                            <input type=\"hidden\" name=\"name\" value=\"{$rij['naam']}\" >
+                            <input type=\"submit\" name=\"toevoegen\" value=\"Toevoegen\">
+                        </form>
+                        <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
+                    </div>
+                </div>";
+
+            }
+
+
+            // stap 4: De verbinding met de database sluiten  
+
+            if (!mysqli_close($conn)) {
+                echo "FOUT: De verbinding kon niet worden gesloten"; 
+                exit;
+            } 
+            ?>
         </div>
         <footer class="footerBottom">
             Juicy3 By Emile Goeminne

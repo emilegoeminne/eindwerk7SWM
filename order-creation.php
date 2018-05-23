@@ -357,9 +357,9 @@ echo $_SESSION['rtotal']
                         </div>
                     </div>
                 </div>
-            </div>
-            <input type="submit">
-        </form>
+                <input type="submit">
+            </form>
+        </div>
         <footer class="footerBottom">
             Juicy3 By Emile Goeminne
         </footer>
