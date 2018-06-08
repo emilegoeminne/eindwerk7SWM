@@ -97,9 +97,46 @@ session_start();
                         <img class='img-100' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak Banaan\" >
                     </div>
 
-                    <div class='col products'>
-                        <h3>{$rij['naam']}</h3>
+                    <div class='col detailContent products'>
+                        <div class='header'>
+                            <h3>{$rij['naam']}</h3>
+                        </div>
                         <p>{$rij['description']}</p>
+                            <div class='contentContainer'>
+                                <div class='iconAndContent'>
+                                    <div class='col smallIcon'>
+                                        <img class='' src=\"images/icons/care.svg\" alt=\"Zorg\" >
+                                    </div>
+                                    <div class='col smallIconContent'>
+                                        <p>Gezond!</p>
+                                    </div>
+                                </div>
+                                <div class='iconAndContent'>
+                                    <div class='col smallIcon'>
+                                        <img class='' src=\"images/icons/flask.svg\" alt=\"Zorg\" >
+                                    </div>
+                                    <div class='col smallIconContent'>
+                                        <p>Geen chemishe troep</p>
+                                    </div>
+                                </div>
+                                <div class='iconAndContent'>
+                                    <div class='col smallIcon'>
+                                        <img class='' src=\"images/icons/gum.svg\" alt=\"Zorg\" >
+                                    </div>
+                                    <div class='col smallIconContent'>
+                                        <p>Natuurlijke suikers</p>
+                                    </div>
+                                </div>
+                                <div class='iconAndContent'>
+                                    <div class='col smallIcon'>
+                                        <img class='' src=\"images/icons/leaf.svg\" alt=\"Zorg\" >
+                                    </div>
+                                    <div class='col smallIconContent'>
+                                        <p>Altijd vers</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class='bigText'>€ {$rij['prijs']}</p>
                         <form method=\"post\" action=\"add_to_cart.php\">
                             <label for=\"amount\">Amount</label>
                             <input type=\"number\" name=\"amount\" value=\"amount\" required >*
@@ -122,10 +159,10 @@ session_start();
             } 
             ?>
         </div>
-        <footer class="footerBottom">
-            Juicy3 By Emile Goeminne
+        <footer class="footer">
+            <span>Juicy3 By Emile Goeminne</span>
         </footer>
-        <script src="../js/dist/main.min.js"></script>
+        <script src="js/dist/main.min.js"></script>
     </body>
 </html>
 

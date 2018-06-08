@@ -101,6 +101,9 @@
     }
 ?>
         </div>
-        <script src="../js/dist/main.min.js"></script>
+        <footer class="footer">
+            <span>Juicy3 By Emile Goeminne</span>
+        </footer>
+        <script src="js/dist/main.min.js"></script>
     </body>
 </html>

@@ -119,13 +119,12 @@ if(!isset($_SESSION['name']) && !$_SESSION['rank'] == 2){
 }
 ?>
         </div>
-        <footer class="footerBottom">
-            Juicy3 By Emile Goeminne
+        <footer class="footer">
+            <span>Juicy3 By Emile Goeminne</span>
         </footer>
-        <script src="../js/dist/main.min.js"></script>
+        <script src="js/dist/main.min.js"></script>
     </body>
 </html>
-
 
     
 

@@ -112,18 +112,13 @@
             <a href="register.php">Registreer</a>     
             </main>
         </div>
-        
-        <footer>
-            <p>&copy; <?php echo date("Y");?> VISO Mariakerke</p>
+        <footer class="footer">
+            <span>Juicy3 By Emile Goeminne</span>
         </footer>
-
+        <script src="js/dist/main.min.js"></script>
     </body>
 </html>
 <?php
     }
     $conn->close(); 
-    ?>
-        </div>
-        <script src="../js/dist/main.min.js"></script>
-    </body>
-</html>
+?>

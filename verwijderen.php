@@ -76,42 +76,48 @@ if(!isset($_SESSION['name']) && !$_SESSION['rank'] == 2){
                 </div>
             </div>
         </header>
-<?php
+        <?php
 
-//stap 1b: bestand db_conn.php insluiten
-include("includes/db_conn.php");
+        //stap 1b: bestand db_conn.php insluiten
+        include("includes/db_conn.php");
 
-// SQL-injectie voorkomen
-	// 1) zet integers om met (int) $_POST['naamveld']
-	$_GET['product_id'] = (int) $_GET['product_id'];
-	
-	// 2) met mysqli_real_escape_string($conn, $_POST['naamveld']
-
-
-// stap 2: De query opstellen en uitvoeren
-
-$query = "DELETE FROM producten WHERE product_id=".$_GET["product_id"]." LIMIT 1";
-
-if (!$result = mysqli_query($conn,$query)) {
-    echo "FOUT: Query kon niet uitgevoerd worden"; 
-	exit;
-}
-
-// stap 3: niet nodig - we lezen niets uit de database
-
-// stap 4: De verbinding met de database sluiten  
-
-if (!mysqli_close($conn)) {
-    echo "FOUT: De verbinding kon niet worden gesloten"; 
-    exit;
-}
+        // SQL-injectie voorkomen
+            // 1) zet integers om met (int) $_POST['naamveld']
+            $_GET['product_id'] = (int) $_GET['product_id'];
+            
+            // 2) met mysqli_real_escape_string($conn, $_POST['naamveld']
 
 
-// stap 5: Terugkeren naar admin.php  
-header("Location:admin.php");
-exit;
-}
+        // stap 2: De query opstellen en uitvoeren
 
+        $query = "DELETE FROM producten WHERE product_id=".$_GET["product_id"]." LIMIT 1";
+
+        if (!$result = mysqli_query($conn,$query)) {
+            echo "FOUT: Query kon niet uitgevoerd worden"; 
+            exit;
+        }
+
+        // stap 3: niet nodig - we lezen niets uit de database
+
+        // stap 4: De verbinding met de database sluiten  
+
+        if (!mysqli_close($conn)) {
+            echo "FOUT: De verbinding kon niet worden gesloten"; 
+            exit;
+        }
+
+
+        // stap 5: Terugkeren naar admin.php  
+        header("Location:admin.php");
+        exit;
+        }
+        ?>
+        <footer class="footer">
+            <span>Juicy3 By Emile Goeminne</span>
+        </footer>
+        <script src="js/dist/main.min.js"></script>
+    </body>
+</html>
 
 
 
