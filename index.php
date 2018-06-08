@@ -27,10 +27,9 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
             <div class="container-fluid main-header">
                 <!-- The video -->
                 <div class="row">
-                    <div class="col ">
-                        <img src="images/cart_filled.png" class="cart" alt="Winkelmand voor knop Koop nu"><button type="button" class="btn-underline"><a href="" class="buy">Koop nu</a></button>
-                    </div>
-                    <div class="row align-items-center">
+
+                    <div class="col topLeftFixed">
+                        <img src="images/cart_filled.png" class="cart" alt="Winkelmand voor knop Koop nu"><button type="button" class="btn-underline"><a href="products.php" class="buy">Koop nu</a></button>
                     </div>
                     <div class="col">
                         <div id="mySidenav" class="sidenav">
@@ -95,19 +94,37 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
 
                     if (mysqli_num_rows($result) > 0) {
                             while ($rij = mysqli_fetch_array($result)) {
-                                echo "
-                                <div class='row align-items-center'>
-                                    <div class=\"col\">
-                                        <img class='img-100' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak Banaan\" >
-                                    </div>
-        
-                                    <div class='col products'>
-                                        <h3>{$rij['naam']}</h3>
-                                        <p>{$rij['description']}</p>
-                                        <button type=\"button\" class=\"btn btn-underline\"><a href=\"order-creation.php\">Bestel</a></button>
-                                        <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
-                                    </div>
-                                </div>";
+                                if($rij['product_id'] == 19 || $rij['product_id'] == 21){
+                                    echo "
+                                    <div class='row align-items-center'>
+                                        <div class=\"col align-items-left\">
+                                            <img class='img-100' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak Banaan\" >
+                                        </div>
+            
+                                        <div class='col products'>
+                                            <h3>{$rij['naam']}</h3>
+                                            <p>{$rij['description']}</p>
+                                            <button type=\"button\" class=\"btn btn-underline\"><a href=\"order-creation.php\">Bestel</a></button>
+                                            <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
+                                        </div>
+                                    </div>";
+                                }else{
+                                    echo "
+                                    <div class='row align-items-center'>
+            
+                                        <div class='col products'>
+                                            <h3>{$rij['naam']}</h3>
+                                            <p>{$rij['description']}</p>
+                                            <button type=\"button\" class=\"btn btn-underline\"><a href=\"order-creation.php\">Bestel</a></button>
+                                            <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
+                                        </div>
+
+                                        <div class=\"col\">
+                                            <img class='img-100 align-items-right ' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak Banaan\" >
+                                        </div>
+
+                                    </div>";
+                                }  
                                 
                             }
 
@@ -126,8 +143,8 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
 
                 ?>
         </div>
-        <footer>
-            Juicy3 By Emile Goeminne
+        <footer class="footer">
+            <span>Juicy3 By Emile Goeminne</span>
         </footer>
         <script src="js/dist/main.min.js"></script>
     </body>

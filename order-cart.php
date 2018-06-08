@@ -1,6 +1,9 @@
 <?php
     include("includes/db_conn.php");
     session_start();
+    if(isset($_POST['amount'])){
+        $val = $_POST['amount'];
+    }
     if(isset($_POST['remove'])) {
         // handle remove
         $key = $_POST['remove'];
@@ -25,7 +28,7 @@
         <meta name="msapplication-TileImage" content="../images/favicon/mstile-144x144.png">
         <meta name="theme-color" content="#f5f5f5">
     </head>
-    <body>
+    <body class="order">
         <header>
             <div class="container-fluid row">
                 <div class="container-fluid logo">
@@ -64,9 +67,17 @@
                                 ?>
                             </ul>
                             <div class="socials">
-                                <img src="#">
-                                <img src="#">
-                                <img src="#">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="images/logos/fb.svg">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="images/logos/ig.svg">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="images/logos/yt.svg">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,12 +85,35 @@
                 </div>
             </div>
         </header>
-
+        <div class="container-fluid progress">
+            <ol class='cart-progress'>
+                <li class='cart-progress__step active'>
+                    <span class='cart-progress__step-label'></span>
+                </li>
+                <li class='cart-progress__step'>
+                    <span class='cart-progress__step-label'></span>
+                </li>
+                <li class='cart-progress__step'>
+                    <span class='cart-progress__step-label'></span>
+                </li>
+            </ol>
+            <div class="row">
+                <div class="col text-left">
+                    <p >Cart</p>
+                </div>
+                <div class="col">
+                    <p>Info</p>
+                </div>
+                <div class="col text-right">
+                    <p>Payment</p>
+                </div>
+            </div>
+        </div>
+        <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
         <?php 
         if(!empty($_SESSION['winkelwagen'])){ 
         ?>                
         <h4>Uw winkelwagen bevat reeds: </h4>
-        <table width="100%" border="0" cellspacing="10">
         <?php
         foreach($_SESSION['winkelwagen'] as $key=>$val) 
             {
@@ -95,33 +129,47 @@
                     $_SESSION['som'] = $som;
                     $_SESSION['total'] = $totaal;
                 ?>
-                    <tr>
-                    <td><?php echo $rij['naam'];?></td>
-                    <td><?php echo $rij['description'];?></td>
-                    <td>€ <?php echo $rij['prijs'];?></td>
-                    <td>€ <?php echo $totaal;?></td>
-                    <form method="post">
-                        <td><?php echo $val; ?>&nbsp;<button type="submit" name="remove" value="<?php echo $key; ?>">verwijder</button></td>
-                    </form>
-                </tr>
-                    <?php	
-                } //afsluiten while
+                    <div class="quantity">
+                        <p class="col-6"><?php echo $rij['naam'];?></p>
+                        <div class="amountPick col-3">
+                            <button class="plus-btn" type="button" name="button">
+                                <img src="images/icons/plus.svg" alt="" />
+                            </button>
+                            <input type="text" id="amount" class="Input" name="amount" value="<?php echo $val; ?>">
+                            <button class="minus-btn" type="button" name="button">
+                                <img src="images/icons/minus.svg" alt="" />
+                            </button>
+                        </div>
+                        <p>€ <?php echo $rij['prijs'];?></p>
+                        <p><button type="submit" name="remove" class="boldNLeft" value="<?php echo $key; ?>">X</button></p>
+                    </div>
                     
+                    <?php
+                } //afsluiten while
+
             } // afsluiten foreach
-        } // afsluiten if(!empty($_SESSION['winkelwagen'] 
+            $real_total += $_SESSION['som'];
+            $_SESSION['rtotal'] = $real_total;
+
+            ?>
+            <div class="blueBackground">
+                <p class="float-left">Totaal</p>
+                <p class="float-right">€ <?php echo $real_total;?></p>
+            </div>
+            <div class="align-center" >
+                <button type="button" class="btn btn-underline"><a href="order-creation.php">Volgende</a></button>
+            </div>
+            <?php
+        } // afsluiten if(!empty($_SESSION['winkelwagen']
         else{
-            ?> 
+            ?>
             <h4>U heeft nog geen product geselecteerd! </h4>
             <?php
         }
-        $real_total += $_SESSION['som'];
-        $_SESSION['rtotal'] = $real_total;
-        echo $_SESSION['rtotal'];
         ?>
-        <button type="button" class="btn btn-underline"><a href="order-creation.php">Volgende</a></button>
-        
-        <footer class="footerBottom">
-            Juicy3 By Emile Goeminne
+        </form>
+        <footer class="footer">
+            <span>Juicy3 By Emile Goeminne</span>
         </footer>
         <script src="js/dist/main.min.js"></script>
     </body>

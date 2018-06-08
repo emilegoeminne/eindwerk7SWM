@@ -1,3 +1,14 @@
+<?php
+    include("includes/db_conn.php");
+    session_start();
+    if(isset($_POST['remove'])) {
+        // handle remove
+        $key = $_POST['remove'];
+        unset($_SESSION['winkelwagen'][$key]);
+    }
+    $som = 0;
+    $real_total = 0;
+?>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -63,56 +74,45 @@
                 </div>
             </div>
         </header>
-
-        <div class="container">
-            <div class="row">
-                <form  method="post" action="order-creation__back.php">
-                    <div class="row">
-                        <div class="col col-50">
-                            <div class="col col-50">
-                                <div class="form-group col">
-                                    <label for="paypal" class="col-sm col-form-label">Paypal : </label>
-                                    <div class="col-sm">
-                                        <input type="text" class="form-control" name="paypal" id="paypal" placeholder="Harelbeke">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-50">
-                                <div class="form-group col">
-                                    <label for="creditCard" class="col-sm col-form-label">CreditCard : </label>
-                                    <div class="col-sm">
-                                        <input type="number" name="creditCard" class="form-control" id="creditCard" placeholder="8530">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-50">
-                            <div class="form-group col">
-                                <input type="hidden" name="id" value="" >
-                                <label for="inputCardNumber" class="col-sm col-form-label">Card Number : </label>
-                                <div class="col-sm">
-                                    <input type="number" name="inputCardNumber" class="form-control" id="inputCardNumber" placeholder="1234 5678 9101 1121">
-                                </div>
-                                <label for="inputName" class="col-sm col-form-label">Cardholder name : </label>
-                                <div class="col-sm">
-                                    <input type="text" name="inputName" class="form-control" id="inputName" placeholder="John Doe">
-                                </div>
-                                <label for="inputDate" class="col-sm col-form-label">Expiry Date : </label>
-                                <div class="col-sm">
-                                    <input type="date" name="inputDate" class="form-control" id="inputDate" placeholder="11 / 21">
-                                </div>
-                                <label for="inputCode" class="col-sm col-form-label">CCV : </label>
-                                <div class="col-sm">
-                                    <input type="date" name="inputCode" class="form-control" id="inputCode" placeholder="11 / 21">
-                                </div>
-                            </div>
-                        </div>
+        <?php 
+        if(!empty($_SESSION['winkelwagen'])){ 
+        ?>                
+        <h4>Pagina niet gevonden, Error 404. </h4>
+        <p> Mag je hier wel zijn? :l</p>
+        <button type="button" class="btn btn-underline"><a href="products.php">Keer terug</a></button>
+            <?php
+        } // afsluiten if(!empty($_SESSION['winkelwagen'] 
+        else{
+            ?>
+            <div class="container-fluid progress">
+                <ol class='cart-progress'>
+                    <li class='cart-progress__step active'>
+                        <span class='cart-progress__step-label'></span>
+                    </li>
+                    <li class='cart-progress__step'>
+                        <span class='cart-progress__step-label'></span>
+                    </li>
+                    <li class='cart-progress__step'>
+                        <span class='cart-progress__step-label'></span>
+                    </li>
+                </ol>
+                <div class="row">
+                    <div class="col text-left">
+                        <p >Cart</p>
+                    </div>
+                    <div class="col">
+                        <p>Info</p>
+                    </div>
+                    <div class="col text-right">
+                        <p>Payment</p>
                     </div>
                 </div>
-                <input type="submit">
-                </form>
             </div>
-            </div>
+            <h4>U heeft nog geen product geselecteerd! </h4>
+            <button type="button" class="btn btn-underline"><a href="products.php">Keer terug</a></button>
+            <?php
+        }
+        ?>
         <footer class="footer">
             <span>Juicy3 By Emile Goeminne</span>
         </footer>

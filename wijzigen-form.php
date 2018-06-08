@@ -107,11 +107,11 @@ if (!mysqli_close($conn)) {
 
 				<input type="submit" name="btn_wijzigen" id="btn_wijzigen" value="wijzigen">
 			</form>
-		</div>
-		<footer class="footerBottom">
-            Juicy3 By Emile Goeminne
+        </div>
+        <footer class="footer">
+            <span>Juicy3 By Emile Goeminne</span>
         </footer>
-        <script src="../js/dist/main.min.js"></script>
+        <script src="js/dist/main.min.js"></script>
     </body>
 </html>
 <?php

@@ -34,6 +34,28 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
                                 <li><a href="products.php">Producten</a></li>
                                 <li><a href="contact.php">Contact</a></li>
                                 <li><img src="images/cart.png" class="cart" alt="Winkelmand voor knop Koop nu"><button type="button" class="btnUnderline"><a class="buy">Koop nu</a></button></li>
+                                <?php
+                                    if(isset($_SESSION['name']) && $_SESSION['rank'] == 2){
+                                ?>
+                                <li>
+                                    <a href="toevoegen.php">Toevoegen</a>
+                                </li>
+                                <?php
+                                    }
+                                    if(!isset($_SESSION['name'])){
+                                ?>
+                                <li>
+                                    <a href="login.php">log in</a>
+                                </li>
+                                <?php
+                                    }else if(isset($_SESSION['name']) && $_SESSION['rank'] > 0){
+                                ?>
+                                <li>
+                                    <a href="uitlog.php">Uitloggen</a>
+                                </li>
+                                <?php
+                                    }
+                                ?>
                             </ul>
                             <div class="socials">
                                 <img src="#">
@@ -47,60 +69,65 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
             </div>
         </header>
 
-        <div class="container">
+        <div class="container-fluid">
             <h2>Producten</h2>
-            <?php
-                    // stap 2: De query opstellen en uitvoeren
+            <div class="container">
+                <div class="container-grid align-items-fix">
+                <?php
+                        // stap 2: De query opstellen en uitvoeren
 
-                    $images = "SELECT foto,naam,product_id FROM producten";
+                        $images = "SELECT foto,naam,product_id FROM producten";
 
-                    if (!$result = mysqli_query($conn,$images)) {
-                        echo "FOUT: Query kon niet uitgevoerd worden"; 
-                        exit;
-                    }
-                    
+                        if (!$result = mysqli_query($conn,$images)) {
+                            echo "FOUT: Query kon niet uitgevoerd worden"; 
+                            exit;
+                        }
+                        
 
 
-                    // stap 3: De resultaten naar het scherm schrijven
+                        // stap 3: De resultaten naar het scherm schrijven
 
-                    if (mysqli_num_rows($result) > 0) {
-                            while ($rij = mysqli_fetch_array($result)) {
-                                ?>
-                                <div class="row left-float">
-                                        <?php
-                                        echo "
-                                            <div class=\"col\">
-                                                <img class='img-100' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak {$rij['naam']}\" >
-                                            </div>";
-
-                                        echo "        
-                                            <div class='btnInfo'>
-                                                <h3>{$rij['naam']}</h3>
-                                                <button type=\"button\" class=\"btn btn-underline\"><a href=\"order-creation.php\">Bestel</a></button>
-                                                <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
-                                            </div>";
-                                        ?>
+                        if (mysqli_num_rows($result) > 0) {
+                                while ($rij = mysqli_fetch_array($result)) {
+                        ?>
+                            <div class="row left-float">
+                        <?php
+                            echo "
+                                <div class=\"col\">
+                                <img class='img-100' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak {$rij['naam']}\" >
                                 </div>
-                                <?php
-                            }
+                            ";
 
-                    }else {
-                        echo "<p>Er werden geen gegevens gevonden in de DB</p>";	
-                    } // einde if (mysqli_num_rows($result) > 0)
+                            echo "        
+                                <div class='btnInfo'>
+                                <h3>{$rij['naam']}</h3>
+                                <button type=\"button\" class=\"btn btn-underline\"><a href=\"order-creation.php\">Bestel</a></button>
+                                <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
+                                </div>
+                            ";
+                            ?>
+                        </div>
+                        <?php
+                        }
+
+                        }else {
+                            echo "<p>Er werden geen gegevens gevonden in de DB</p>";	
+                        } // einde if (mysqli_num_rows($result) > 0)
 
 
 
-                    // stap 4: De verbinding met de database sluiten  
+                            // stap 4: De verbinding met de database sluiten  
 
-                    if (!mysqli_close($conn)) {
-                        echo "FOUT: De verbinding kon niet worden gesloten"; 
-                        exit;
-                    } 
-
-                ?>
+                        if (!mysqli_close($conn)) {
+                            echo "FOUT: De verbinding kon niet worden gesloten"; 
+                            exit;
+                        } 
+                    ?>
+                </div>
+            </div>
         </div>
-        <footer class="footerBottom">
-            Juicy3 By Emile Goeminne
+        <footer class="footer">
+            <span>Juicy3 By Emile Goeminne</span>
         </footer>
         <script src="js/dist/main.min.js"></script>
     </body>

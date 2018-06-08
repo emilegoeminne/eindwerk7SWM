@@ -19,23 +19,27 @@
 *{
     box-sizing: border-box;
 }
+html {
+  position: relative;
+  min-height: 100%;
+}
 body{
+    position: relative;
     background: #E9E9E8;
     color: #515AA3;
     max-width: 100%;
-    position: relative;
+    margin-bottom: 60px; /* Margin bottom by footer height */
 }
 header{
     position: relative;
+    min-height: 250px;
 }
 video{
-    position: absolute;
+    position: relative;
     max-width: 100%;
-    z-index: -100;
+    z-index: -99;
 }
 .main-header{
-    /* Full height */
-    height: 100%; 
 
     /* Center and scale the image nicely */
     background-position: center;
@@ -44,9 +48,49 @@ video{
     padding-top: 64px;
     z-index: 99;
 }
+.socials{
+  .row{
+    text-align: center;
+    .col-4{
+      img{
+        width: 40%;
+      }
+    }
+  }
+}
+.topLeftFixed{
+    position: absolute;
+    top: 45px;
+}
+.mobile-menu-items {
+    position: relative;
+    img.cart {
+        position: relative;
+        width: 15%;
+        float: left;
+        padding-top: 15px;
+    }
+    img.btnCart{
+        position: relative;
+        width: 20%;
+        float: left;
+        
+    }
+    .buy{
+        position: relative;
+        font-size: 1.5em;
+        color: #E9E9E8 !important;
+        float: left;
+        padding-top : 0;
+    }
+    button{
+        height: 56px;
+    }
+}
 img.cart{
-    width: 5%;
-    float: left;
+    width: 2%;
+    position: absolute;
+    top: 0px;
     padding-top: 15px;
 }
 img.btnCart{
@@ -56,8 +100,11 @@ img.btnCart{
 }
 .buy{
     font-size: 1.5em;
-    float: left;
+    position: absolute;
+    top: 3px;
+    left: 4%;
     padding-top : 0;
+    z-index: 102;
 }
 .logo{
     text-align: center;
@@ -67,11 +114,9 @@ h2{
     font-size: 3em;
     text-align: center;
 }
-.page-main>h2{
-    padding-top: 104px
-}
 .img-100{
     width: 100%;
+    clear: both;
 }
 .logo img{
     width: 4%;
@@ -118,7 +163,6 @@ p{
         color: #E9E9E8;
         display: block;
         transition: 0.3s;
-        width: 227px;
   }
   /* When you mouse over the navigation links, change their color */
   .sidenav a:hover, .offcanvas a:focus {
@@ -174,8 +218,36 @@ p{
     color: #515AA3;
     float: left;
 }
-.smallIcon .col img{
-    width: 50%;
+.iconAndContent{
+  width: 25%;
+  float: left;
+  text-align: center;
+  @include clearfix();
+}
+.smallIcon img{
+  width: 50%;
+  margin: 0 auto;
+}
+.smallIconContent p{
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+}
+.contentContainer{
+  @include clearfix();
+}
+.detailContent{
+  .header{
+    width: 20%;
+    border-bottom: 3px solid rgba(0, 123, 255, 0.29);
+    h3{
+      font-weight: 300;
+    }
+  }
+  .bigText{
+    font-size: 3rem;
+    font-weight: 300;
+  }
 }
 button{
     background: none;
@@ -196,13 +268,26 @@ button{
   }
 .btnInfo{
     width: 100%;
+    text-align: center;
 }
 .left-float{
     float: left;
     width: 33%;
 }
+.blueBackground{
+  color: #515AA3;
+  background: rgba(0, 123, 255, 0.29);
+  font-weight: bold;
+  p{
+    padding: 2%;
+  }
+  @include clearfix();
+}
 h3{
     font-size: 4rem;
+}
+button+button{
+    margin-left: 50px;
 }
 form input,textarea{
     width: 100%;
@@ -222,45 +307,128 @@ form input,textarea{
     border: none;
     color: #D3D3D3;
 }
+.quantity{
+  background: white;
+  border: 1px solid rgba(0, 123, 255, 0.29);
+  margin-bottom: 3%;
+  width: 100%;
+  position: relative;
+  @include clearfix();
+}
+.order form{
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  .col-6{
+    float: left;
+  }
+  input{
+    width: 20%;
+    border: none;
+  }
+  .amountPick{
+    float: left;
+  }
+  .boldNLeft{
+    float: right;
+    top: 0;
+    right: 0;
+    font-weight: bold;
+    color: #515AA3;
+    position: absolute;
+  }
+}
+.align-items-fix{
+    margin-left: 80px;
+}
+.align-center{
+  text-align: center;
+}
+.container>form{
+  padding-bottom: 10px;
+}
+label{
+  padding: 2% 0;
+  font-weight: lighter;
+  font-size: 0.9rem;
+  letter-spacing: 1.1;
+}
+.col-sm{
+  > select{
+    margin: 2% 0;
+  }
+}
+/* ORDER PAGE */
+.progress{
+    width: 50%;
+    text-align: center;
+}
 
+$gray: rgba($color: #515AA3, $alpha: 0.2);
+$half: #8E93BF;
+$blue: #515AA3;
+
+.cart-progress {
+  list-style: none;
+  text-align: center;
+  margin: 40px auto;
+  padding: 0;
+  border-top: 6px solid $gray;
+  color: #EDEDED;
+  &__step {
+    margin-top: -22px;
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background: $half;
+    border-radius: 25px;
+    text-align: center;
+    padding: 8px 2px;
+    z-index: 2;
+    
+    &:first-of-type {
+      float: left;
+      
+      text-align: left;
+    }
+    
+    
+    &:last-of-type {
+      float: right;
+      text-align: right;
+    }
+  }
+  .active{
+    background: $blue !important;
+    }  
+}
 /* ORDER PAGE */
 
-.order-navigation{
-    width: 10%;
-}
-.order-navigation .order-navigation__circle{
-    padding: 0;
-    margin: 0;
-    background: rgba($color: #515AA3, $alpha: 0.2);
-    border-radius: 100%;
-}
 
-
-/* ORDER PAGE */
 .width-33{
     width: 33%;
 }
 
-footer{
-    
-    text-align: center;
-    background: #EDEDED;
-    padding: 1rem;
+.footer {
     position: absolute;
-    left: 0;
-    bottom: 0;
+    bottom: -60;
     width: 100%;
-    height: 100px;
-}
-.row+.row{
-    padding-top: 16px;
-}
+    text-align: center;
+    height: 60px; /* Set the fixed height of the footer here */
+    line-height: 60px; /* Vertically center the text there */
+    background: #EDEDED;
+  }
+
 .blueUnderline{
     border-bottom: 4px solid rgb(214, 218, 255);
     border-radius: 10px;
 }
+.container-fluid{
+    @include clearfix;
+}
 .container{
     padding-top: 128px;
-    min-height: calc(100vh - 100px);
-    padding-bottom: 120px;
+}
+.container-fluid>.container{
+    padding-top: 0;
 }
