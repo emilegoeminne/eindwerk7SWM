@@ -1,94 +1,55 @@
 <?php
-require('factuur/fpdf.php');
+    include("includes/db_conn.php");
+    session_start();
 
-//Connect to your database
-include("includes/db_conn.php");
+    //stap 1b: bestand db_conn.php insluiten
 
-//Select the Products you want to show in your PDF file
-$result=mysqli_query($conn,"select product_dsc,name,product,id from order_product ORDER BY product");
-$sql=mysqli_query($conn,"select product_id,naam,prijs from producten ORDER BY product_id");
-$number_of_products = mysqli_num_rows($result);
+    if (!isset($_GET["id"])){
+        // als de url-parameter niet werd meegegeven ga terug naar index.php
+        echo "ERROR: Could not able to execute" . mysqli_error($conn);
+    }
 
-//Initialize the 4 columns and the total
-$column_code = "";
-$column_name = "";
-$column_price = "";
-$column_amount = "";
-$total = 0;
 
-//For each row, add the field to the corresponding column
-while($row = mysqli_fetch_array($sql))
-{
-	$name = substr($row["naam"],0,20);
-	$column_name = $column_name.$name."\n";
-	$real_price = $row["prijs"];
-	
-	
-}
-while($row = mysqli_fetch_array($result))
-{
-	$code = $row["id"];
-	$amount_to_show = $row["product_dsc"];
-	$column_code = $column_code.$code."\n";
-	
-	$amount = $row["product_dsc"];
+    // stap 2: De query opstellen en uitvoeren
 
-	$column_price = $real_price;
+    $query = "SELECT * FROM order_product WHERE id=".$_GET["id"];
 
-	$column_amount = $amount_to_show;
-	
-	//Sum all the Prices (TOTAL)
-	$total = $total+$real_price;
-}
-mysqli_close($conn);
+    if (!$result = mysqli_query($conn,$query)) {
+        echo "FOUT: Query kon niet uitgevoerd worden";
+        exit;
+    }
+    // stap 3: De resultaten naar het scherm schrijven
+    while ($rij = mysqli_fetch_array($result)) {
+        //gebruik de generator FPDF
+        require('fpdf/fpdf.php');
+        //stel het paginaformaat in
+        $pdf=new FPDF('P', 'mm', 'A4');
+        //maak een nieuwe pagina aan
+        $pdf->Addpage();
+        //gebruik Arial 16pt Vet
+        $pdf->SetFont('Arial','B',16);
+        //plaats de tekst
+        $pdf->Cell(40,10,'FAKTOER '.$rij['id']);
+        //plaats het logo
+        $pdf->Image("images/viso.png", 10, 20, 40, 40);
+        //volgend tekstkader
+        $pdf->SetXY(10,80);
+        $pdf->SetFont('Arial','B',10);
+        $pdf->Cell(40,10,'Factuur'.$rij['id']);
+        $pdf->SetFont('Arial','',10);
+        //volgend tekstkader
+        $pdf->SetXY(10,100);
+        $pdf->Cell(40,10,'Betaal ke '.$rij['total'].' euro');
+        $pdf->SetFont('Arial','B',10);
+        $pdf->Cell(50,10,'Te betalen : '.$rij['total'].' euro');
 
-//Create a new PDF file
-$pdf=new FPDF();
-$pdf->AddPage();
+        //open het PDF-bestand
+        $pdf->Output();
+    }
+    // stap 4: De verbinding met de database sluiten
 
-//Fields Name position
-$Y_Fields_Name_position = 20;
-//Table position, under Fields Name
-$Y_Table_Position = 26;
-
-//First create each Field Name
-//Gray color filling each Field Name box
-$pdf->SetFillColor(232,232,232);
-//Bold Font for Field Name
-$pdf->SetFont('Arial','B',12);
-$pdf->SetY($Y_Fields_Name_position);
-$pdf->SetX(45);
-$pdf->Cell(20,6,'CODE',1,0,'L',1);
-$pdf->SetX(65);
-$pdf->Cell(100,6,'NAME',1,0,'L',1);
-$pdf->SetX(135);
-$pdf->Cell(30,6,'PRICE',1,0,'R',1);
-$pdf->Ln();
-
-//Now show the 3 columns
-$pdf->SetFont('Arial','',12);
-$pdf->SetY($Y_Table_Position);
-$pdf->SetX(45);
-$pdf->MultiCell(20,6,$column_code,1);
-$pdf->SetY($Y_Table_Position);
-$pdf->SetX(65);
-$pdf->MultiCell(100,6,$column_name,1);
-$pdf->SetY($Y_Table_Position);
-$pdf->SetX(135);
-$pdf->MultiCell(30,6,$column_price,1,'R');
-$pdf->SetX(135);
-$pdf->MultiCell(30,6,'$ '.$total,1,'R');
-
-//Create lines (boxes) for each ROW (Product)
-//If you don't use the following code, you don't create the lines separating each row
-$i = 0;
-$pdf->SetY($Y_Table_Position);
-while ($i < $number_of_products)
-{
-	$pdf->SetX(45);
-	$pdf->MultiCell(120,6,'',1);
-	$i = $i +1;
-}
-
-$pdf->Output();
+    if (!mysqli_close($conn)) {
+        echo "FOUT: De verbinding kon niet worden gesloten";
+        exit;
+    }
 ?>

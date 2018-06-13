@@ -1,3 +1,7 @@
+<?php
+    include ('includes/db_conn.php');
+    session_start();
+?>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -69,43 +73,40 @@
             <div class="alert alert-light" role="alert">
                 <strong>Vul dit in en verstuur ons je feedback!</strong>
             </div>
-            <div class="row">
-                <div class="col col-50">
-                    <form>
+            <form action="contact__back.php" method="post">
+                <div class="row">
+                    <div class="col col-50">
                         <div class="form-group col">
                             <label for="inputName" class="col-sm col-form-label">Naam : </label>
                             <div class="col-sm">
-                            <input type="text" class="form-control" id="inputName" placeholder="Naam">
+                                <input type="text" class="form-control" name="inputName" id="inputName" placeholder="Naam">
                             </div>
                             <label for="inputEmail" class="col-sm col-form-label">Email : </label>
                             <div class="col-sm">
-                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Email">
                             </div>
-                            <label for="inputProbleem" class="col-sm col-form-label">Probleem met bestelling? </label>
+                            <label class="col-sm col-form-label">Probleem met bestelling? </label>
                             <div class="col-sm">
-                                <button type="button" class="btn btn-underline"><a href="" class="">Ja</a></button>
+                                <button type="button" name class="btn btn-underline"><a href="" class="">Ja</a></button>
                                 <button type="button" class="btn btn-underline"><a href="" class="">Nee</a></button>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="col col-50">
-                    <form>
+                    </div>
+                    <div class="col col-50">
                         <div class="form-group col">
-                            <label for="inputName" class="col-sm col-form-label">Bericht : </label>
+                            <label for="inputMessage" class="col-sm col-form-label">Bericht : </label>
                             <div class="col-sm">
-                                <textarea class="form-control" rows="8" cols="50">Bericht</textarea>
+                                <textarea class="form-control" name="inputMessage" rows="8" cols="50">Bericht</textarea>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col formSubmit">
-                    <button type="button" class="btn btn-underline"><a href="" class="">Verzend</a></button>
+                <div class="row">
+                    <div class="col formSubmit">
+                        <button type="submit" class="btn btn-underline">Verzend</button>
+                    </div>
                 </div>
-            </div>
-            
+            </form>
         </div>
         <footer class="footer">
             <span>Juicy3 By Emile Goeminne</span>

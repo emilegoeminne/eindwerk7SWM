@@ -109,7 +109,7 @@
                 </div>
             </div>
         </div>
-        <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
+        <form method="post" action="order-creation.php">
         <?php 
         if(!empty($_SESSION['winkelwagen'])){ 
         ?>                
@@ -135,13 +135,13 @@
                             <button class="plus-btn" type="button" name="button">
                                 <img src="images/icons/plus.svg" alt="" />
                             </button>
-                            <input type="text" id="amount" class="Input" name="amount" value="<?php echo $val; ?>">
+                            <input type="number" id="amount" class="Input" name="amount" value="<?php echo $val; ?>">
                             <button class="minus-btn" type="button" name="button">
                                 <img src="images/icons/minus.svg" alt="" />
                             </button>
                         </div>
                         <p>€ <?php echo $rij['prijs'];?></p>
-                        <p><button type="submit" name="remove" class="boldNLeft" value="<?php echo $key; ?>">X</button></p>
+                        <p><button type="button" name="remove" class="boldNLeft" value="<?php echo $key; ?>">X</button></p>
                     </div>
                     
                     <?php

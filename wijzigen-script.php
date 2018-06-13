@@ -1,5 +1,6 @@
 <?php
 session_start(); // Altijd nodig om te starten ook op andere paginas
+include("includes/db_conn.php");
 if(!isset($_SESSION['name']) && !$_SESSION['rank'] == 2){
     header("Location:index.php");
     exit;
@@ -16,12 +17,10 @@ if(!isset($_SESSION['name']) && !$_SESSION['rank'] == 2){
 		exit;
 	}
 
-	//stap 1b: bestand db_conn.php insluiten
-	include("includes/db_conn.php");
 
 	// SQL-injectie voorkomen
 		// 1) zet integers om met (int) $_POST['naamveld']
-		$_POST['product_id'] = (int) $_POST['site_id'];
+		$_POST['product_id'] = (int) $_POST['product_id'];
 		$_POST['waardering'] = (int) $_POST['waardering'];
 		$_POST['prijs'] = (int) $_POST['prijs'];
 		

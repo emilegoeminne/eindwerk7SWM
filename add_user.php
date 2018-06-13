@@ -21,7 +21,7 @@ if(isset($_POST['naam'])&&isset($_POST['wachtwoord'])&&isset($_POST['email'])){
     $wacht = md5($_POST['wachtwoord']);
     $email = $_POST['email'] ;
     // attempt insert query execution
-    $sql = "INSERT INTO login (naam, wachtwoord, email) VALUES ('$naam', '$wacht', '$email' )";
+    $sql = "INSERT INTO login (naam, wachtwoord, email) VALUES ( '$naam', '$wacht', '$email' ) ";
     if(mysqli_query($conn, $sql)){
         echo "Records added successfully.";
 

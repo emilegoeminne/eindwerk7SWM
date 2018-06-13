@@ -1,44 +1,11 @@
 <?php
-    include("includes/db_conn.php");
-    session_start(); // Altijd nodig om te starten ook op andere paginas
-    if($_SERVER['REQUEST_METHOD'] == "POST"){
-        $unaam = mysqli_real_escape_string($conn, $_POST['username']);
-        $password = mysqli_real_escape_string($conn, $_POST['password']);
-        $password=md5($password);
-        $query = "SELECT * FROM login WHERE naam = '$unaam' AND wachtwoord = '$password' ";
-       // or die("Failed Login".mysqli_error($conn));
-        $result = mysqli_query($conn, $query);
-        $res=mysqli_num_rows ( $result );
-        $row = mysqli_fetch_array($result);
-        if($row["naam"] == $unaam && $row["wachtwoord"] == $password && $res == 1){
-            $_SESSION['name'] = $unaam;
-            $_SESSION['wachtwoord'] = $password;
-            $_SESSION['email'] = $row["email"];
-            $_SESSION['rank'] = $row["rank"];
-            $_SESSION['id'] = $row["id"];
-            $_SESSION['news'] = $row["newsletter"];
-            echo "Dag " .$_SESSION['name'] ;
-            if( $_SESSION['rank'] == 2 ){
-                ?>
-                <a href='admin.php'> Controle Paneel </a>
-
-                <?php
-            }
-            ?>
-                <a href='uitlog.php'> Uitloggen </a>
-				<a href='index.php'> Naar Index </a>
-            <?php
-        }
-        else{
-            echo "Foutieve inlog, Probeer nog eens!";
-
-}
-    $result = mysqli_query($conn, $query);
-    }
-    else{
-        ?>
-        <!DOCTYPE html>
-        <html lang="en">
+session_start();
+if(!isset($_SESSION['name']) && !$_SESSION['rank'] == 2){
+    header("Location:index.php");
+    exit;
+}else if(isset($_SESSION['name']) && $_SESSION['rank'] == 2){
+?>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -103,18 +70,60 @@
                 </div>
             </div>
         </header>
-        <main>
         <div class="container">
-            <H2>Admin login</h2>
-            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
-                <label for="name">Naam : </label>
-                <input type="text" name="username" placeholder="Naam" autofocus required />
-                <input type="password" name="password" placeholder="Wachtwoord" required />
-                <input type="hidden" name="rank" placeholder="" />
-                <input type="submit" name="Submit" value="Submit!" />
-            </form>
-            <a href="register.php">Registreer</a>     
-            </main>
+            <h2> Bestellingen</h2>
+            <?php
+
+            //stap 1b: bestand db_conn.php insluiten
+            include("includes/db_conn.php");
+
+
+            // stap 2: De query opstellen en uitvoeren
+
+            $query = "SELECT * FROM order_product ORDER BY order_date";
+
+            if (!$result = mysqli_query($conn,$query)) {
+                echo "FOUT: Query kon niet uitgevoerd worden"; 
+                exit;
+            }
+
+
+            // stap 3: De resultaten naar het scherm schrijven
+            while ($rij = mysqli_fetch_array($result)) {
+                echo "
+                <h2>Nieuwe Bestelling </h2>
+                <div class='row align-items-center'>
+                    <div class='col orders'>
+                        <h4>Datum aankoop : {$rij['order_date']} </h4>
+                        <h4>User</h4>
+                        <h6>{$rij['name']}</h6>
+                        <h4>Product </h4>
+                        <p>{$rij['product']}</p>
+                        <h4>Hoeveelheid </h4>
+                        <h6>{$rij['amount']}</h6>
+                        <h4>Totaal betaald</h4>
+                        <p>{$rij['total']}</p>
+                        <h4>Adres</h4>
+                        <p>{$rij['street']}</p>
+                        <p>{$rij['postcode']}</p>
+                        <p>{$rij['city']}</p>
+                        <p>{$rij['country']}</p>
+                    </div>
+                </div>";
+
+            }
+
+
+            // stap 4: De verbinding met de database sluiten  
+
+            if (!mysqli_close($conn)) {
+                echo "FOUT: De verbinding kon niet worden gesloten"; 
+                exit;
+            } 
+        }else{
+            echo "niet gemachtigd";
+        }
+        ?>
         </div>
         <footer class="footer">
             <span>Juicy3 By Emile Goeminne</span>
@@ -122,7 +131,8 @@
         <script src="js/dist/main.min.js"></script>
     </body>
 </html>
-<?php
-    }
-    $conn->close(); 
-?>
+
+
+
+    
+
