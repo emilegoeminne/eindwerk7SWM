@@ -41,6 +41,12 @@
                                     <li>
                                         <a href="toevoegen.php">Toevoegen</a>
                                     </li>
+                                    <li>
+                                        <a href="admin.php">Admin</a>
+                                    </li>
+                                    <li>
+                                        <a href="orders-admin.php">Order Admin</a>
+                                    </li>
                                     <?php
                                 }
                                 if(!isset($_SESSION['name'])){
@@ -53,6 +59,12 @@
                                     ?>
                                     <li>
                                         <a href="uitlog.php">Uitloggen</a>
+                                    </li>
+                                    <li>
+                                        <a href="orders.php">Orders</a>
+                                    </li>
+                                    <li>
+                                        <a href="nieuwsbrief.php">Newsletter</a>
                                     </li>
                                     <?php
                                 }

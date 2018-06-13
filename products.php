@@ -29,38 +29,60 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
                     <div id="mySidenav" class="sidenav">
                         <a href="#" class="closebtn" id="btnCloseNav">&times;</a>
                         <div class="mobile-menu-items">
+
                             <ul>
                                 <li><a href="index.php">Home</a></li>
                                 <li><a href="products.php">Producten</a></li>
                                 <li><a href="contact.php">Contact</a></li>
                                 <li><img src="images/cart.png" class="cart" alt="Winkelmand voor knop Koop nu"><button type="button" class="btnUnderline"><a class="buy">Koop nu</a></button></li>
                                 <?php
-                                    if(isset($_SESSION['name']) && $_SESSION['rank'] == 2){
-                                ?>
-                                <li>
-                                    <a href="toevoegen.php">Toevoegen</a>
-                                </li>
-                                <?php
-                                    }
-                                    if(!isset($_SESSION['name'])){
-                                ?>
-                                <li>
-                                    <a href="login.php">log in</a>
-                                </li>
-                                <?php
-                                    }else if(isset($_SESSION['name']) && $_SESSION['rank'] > 0){
-                                ?>
-                                <li>
-                                    <a href="uitlog.php">Uitloggen</a>
-                                </li>
-                                <?php
-                                    }
+                                if(isset($_SESSION['name']) && $_SESSION['rank'] == 2){
+                                    ?>
+                                    <li>
+                                        <a href="toevoegen.php">Toevoegen</a>
+                                    </li>
+                                    <li>
+                                        <a href="admin.php">Admin</a>
+                                    </li>
+                                    <li>
+                                        <a href="orders-admin.php">Order Admin</a>
+                                    </li>
+                                    <?php
+                                }
+                                if(!isset($_SESSION['name'])){
+                                    ?>
+                                    <li>
+                                        <a href="login.php">log in</a>
+                                    </li>
+                                    <?php
+                                }else if(isset($_SESSION['name']) && $_SESSION['rank'] > 0){
+                                    ?>
+                                    <li>
+                                        <a href="uitlog.php">Uitloggen</a>
+                                    </li>
+                                    <li>
+                                        <a href="orders.php">Orders</a>
+                                    </li>
+                                    <li>
+                                        <a href="nieuwsbrief.php">Newsletter</a>
+                                    </li>
+                                    <?php
+                                }
                                 ?>
                             </ul>
+
                             <div class="socials">
-                                <img src="#">
-                                <img src="#">
-                                <img src="#">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="images/logos/fb.svg">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="images/logos/ig.svg">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="images/logos/yt.svg">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -73,7 +95,8 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
             <h2>Producten</h2>
             <div class="container">
                 <div class="container-grid align-items-fix">
-                <?php
+
+                        <?php
                         // stap 2: De query opstellen en uitvoeren
 
                         $images = "SELECT foto,naam,product_id FROM producten";
@@ -90,6 +113,7 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
                         if (mysqli_num_rows($result) > 0) {
                                 while ($rij = mysqli_fetch_array($result)) {
                         ?>
+                            <form action="add_to_cart.php" method="post">
                             <div class="row left-float">
                         <?php
                             echo "
@@ -99,11 +123,14 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
                             ";
 
                             echo "        
-                                <div class='btnInfo'>
-                                <h3>{$rij['naam']}</h3>
-                                <button type=\"button\" class=\"btn btn-underline\"><a href=\"order-creation.php\">Bestel</a></button>
-                                <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
-                                </div>
+                                    <div class='btnInfo'>
+                                    <h3>{$rij['naam']}</h3>
+                                    <button type=\"submit\" name=\"toevoegen\" value=\"Bestel\" class=\"btn btn-underline\"><a>Bestel</a></button>
+                                    <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
+                                    <input type=\"hidden\" name=\"amount\" value=\"1\" required >
+                                    <input type=\"hidden\" name=\"product_id\" value=\"{$rij['product_id']}\" >
+                                    </div>
+                               </form>
                             ";
                             ?>
                         </div>
@@ -122,7 +149,8 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
                             echo "FOUT: De verbinding kon niet worden gesloten"; 
                             exit;
                         } 
-                    ?>
+                        ?>
+
                 </div>
             </div>
         </div>
