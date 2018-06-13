@@ -1,7 +1,7 @@
 <?php
 include("includes/db_conn.php");
 session_start();
-if(!empty($_SESSION['winkelwagen'])){     
+if(!empty($_SESSION['winkelwagen'])){
 ?>
 <html lang="en">
     <head>

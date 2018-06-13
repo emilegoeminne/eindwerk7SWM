@@ -1,3 +1,7 @@
+<?php
+    include("includes/db_conn.php");
+    session_start(); // Altijd nodig om te starten ook op andere paginas
+?>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -24,38 +28,48 @@
                     <div id="mySidenav" class="sidenav">
                         <a href="#" class="closebtn" id="btnCloseNav">&times;</a>
                         <div class="mobile-menu-items">
+
                             <ul>
                                 <li><a href="index.php">Home</a></li>
                                 <li><a href="products.php">Producten</a></li>
                                 <li><a href="contact.php">Contact</a></li>
                                 <li><img src="images/cart.png" class="cart" alt="Winkelmand voor knop Koop nu"><button type="button" class="btnUnderline"><a class="buy">Koop nu</a></button></li>
                                 <?php
-                                    if(isset($_SESSION['name']) && $_SESSION['rank'] == 2){
-                                ?>
-                                <li>
-                                    <a href="toevoegen.php">Toevoegen</a>
-                                </li>
-                                <?php
-                                    }
-                                    if(!isset($_SESSION['name'])){
-                                ?>
-                                <li>
-                                    <a href="login.php">log in</a>
-                                </li>
-                                <?php
-                                    }else if(isset($_SESSION['name']) && $_SESSION['rank'] > 0){
-                                ?>
-                                <li>
-                                <a href="uitlog.php">Uitloggen</a>
-                                </li>
-                                <?php
-                                    }
+                                if(isset($_SESSION['name']) && $_SESSION['rank'] == 2){
+                                    ?>
+                                    <li>
+                                        <a href="toevoegen.php">Toevoegen</a>
+                                    </li>
+                                    <?php
+                                }
+                                if(!isset($_SESSION['name'])){
+                                    ?>
+                                    <li>
+                                        <a href="login.php">log in</a>
+                                    </li>
+                                    <?php
+                                }else if(isset($_SESSION['name']) && $_SESSION['rank'] > 0){
+                                    ?>
+                                    <li>
+                                        <a href="uitlog.php">Uitloggen</a>
+                                    </li>
+                                    <?php
+                                }
                                 ?>
                             </ul>
+
                             <div class="socials">
-                                <img src="#">
-                                <img src="#">
-                                <img src="#">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="images/logos/fb.svg">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="images/logos/ig.svg">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="images/logos/yt.svg">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -63,17 +77,44 @@
                 </div>
             </div>
         </header>
-
+        <div class="container-fluid progress">
+            <ol class='cart-progress'>
+                <li class='cart-progress__step'>
+                    <span class='cart-progress__step-label'></span>
+                </li>
+                <li class='cart-progress__step'>
+                    <span class='cart-progress__step-label'></span>
+                </li>
+                <li class='cart-progress__step active'>
+                    <span class='cart-progress__step-label'></span>
+                </li>
+            </ol>
+            <div class="row">
+                <div class="col text-left">
+                    <p>Cart</p>
+                </div>
+                <div class="col">
+                    <p>Info</p>
+                </div>
+                <div class="col text-right">
+                    <p>Payment</p>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="row">
-                <form  method="post" action="order-creation__back.php">
+                <form  method="post" action="order-final.php">
                     <div class="row">
                         <div class="col col-50">
                             <div class="col col-50">
                                 <div class="form-group col">
                                     <label for="paypal" class="col-sm col-form-label">Paypal : </label>
                                     <div class="col-sm">
-                                        <input type="text" class="form-control" name="paypal" id="paypal" placeholder="Harelbeke">
+                                        <label class="image-checkbox">
+                                            <img class="img-responsive" src="images/icons/paypal.png" />
+                                            <input type="checkbox" class="form-control" name="paypal" id="paypal">
+                                            <i class="fa fa-check hidden"></i>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +122,11 @@
                                 <div class="form-group col">
                                     <label for="creditCard" class="col-sm col-form-label">CreditCard : </label>
                                     <div class="col-sm">
-                                        <input type="number" name="creditCard" class="form-control" id="creditCard" placeholder="8530">
+                                        <label class="image-checkbox">
+                                            <img class="img-responsive" src="images/icons/credit-card.png" />
+                                            <input type="checkbox" name="creditCard" class="form-control" id="creditCard" >
+                                            <i class="fa fa-check hidden"></i>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -103,13 +148,13 @@
                                 </div>
                                 <label for="inputCode" class="col-sm col-form-label">CCV : </label>
                                 <div class="col-sm">
-                                    <input type="date" name="inputCode" class="form-control" id="inputCode" placeholder="11 / 21">
+                                    <input type="number" name="inputCode" class="form-control" id="inputCode" placeholder="123">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-underline"><a href="order-creation.php">Volgende</a></button>
                 </div>
-                <input type="submit">
                 </form>
             </div>
             </div>

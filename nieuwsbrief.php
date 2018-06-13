@@ -1,43 +1,8 @@
 <?php
-session_start(); // Altijd nodig om te starten ook op andere paginas
-if(!isset($_SESSION['name']) && !$_SESSION['rank'] == 2){
-    header("Location:index.php");
-    exit;
-}else if(isset($_SESSION['name']) && $_SESSION['rank'] == 2){
-if (!isset($_GET["product_id"])){
-	// als de url-parameter niet werd meegegeven ga terug naar admin.php
-	header('Location: admin.php');
-	exit;
-}
-
-
-//stap 1b: bestand db_conn.php insluiten
-include("includes/db_conn.php");
-
-
-// stap 2: De query opstellen en uitvoeren
-
-$query = "SELECT * FROM producten WHERE product_id=".$_GET["product_id"];
-
-if (!$result = mysqli_query($conn,$query)) {
-    echo "FOUT: Query kon niet uitgevoerd worden"; 
-	exit;
-}
-
-
-// stap 3: De resultaten naar het scherm schrijven
-// while-lus is niet nodig omdat we maar 1 record selecteren
-$rij = mysqli_fetch_array($result);
-
-
-// stap 4: De verbinding met de database sluiten  
-
-if (!mysqli_close($conn)) {
-    echo "FOUT: De verbinding kon niet worden gesloten"; 
-    exit;
-}
-
+    session_start();
+    include("includes/db_conn.php");
 ?>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -113,39 +78,138 @@ if (!mysqli_close($conn)) {
                 </div>
             </div>
         </header>
+<?php
+if(isset($_GET['id'])||isset($_SESSION['id'])) {
+
+    if ($_SESSION['news'] == 1 ) {
+        ?>
         <div class="container">
-			<h2>Wijzigen</h2>
-			<form action="wijzigen-script.php" method="post">
-				<label for="naam">naam</label>
-				<input name="naam" id="naam" type="text" autofocus required value="<?php echo $rij['naam'];?>">
-				
-				<label for="description">description</label>
-				<input name="description" id="description" type="text" required value="<?php echo $rij['description'];?>">
-				
-				<label for="tags">tags</label>
-				<input name="tags" id="tags" type="text" required value="<?php echo $rij['tags'];?>">
-
-				<label for="prijs">prijs</label>
-				<input name="prijs" id="prijs" type="text" value="<?php echo $rij['prijs'];?>">
-
-				<label for="waardering">waardering</label>
-				<input name="waardering" id="waardering" type="number" value="<?php echo $rij['waardering'];?>">
-
-				<label for="foto">foto</label>
-				<input name="foto" id="foto" type="text" value="<?php echo $rij['foto'];?>">
-				
-				<!-- VERGEET NIET OM DE ID MEE TE GEVEN! -->
-				<input name="product_id" id="product_id" type="hidden" value="<?php echo $rij['product_id'];?>">
-
-				<input type="submit" name="btn_wijzigen" id="btn_wijzigen" value="wijzigen">
-			</form>
+            <h2><span>Je bent al ingeschreven voor de nieuwsbrief!</span></h2>
         </div>
+            <footer class="footer">
+                <span>Juicy3 By Emile Goeminne</span>
+            </footer>
+            <script src="js/dist/main.min.js"></script>
+    </body>
+</html>
+        </div>
+        <?php
+        exit;
+    }
+    // SQL-injectie voorkomen
+    // 1) zet integers om met (int) $_POST['naamveld']
+    if(isset($_GET['id'])){
+        $_GET['id'] = (int)$_GET['id'];
+        $_SESSION['id'] = $_GET['id'];
+    }
+
+
+    ?>
+    <div class="container">
+        <h2><span>Meld je aan voor de nieuwsbrief!</span></h2>
+        <form method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
+            <label for="email">Email</label>
+            <input type="text" name="email" value="mail@ik.com" required autofocus>*
+            <br><br>
+            <input type="hidden" name="id" value="<?php $_SESSION['id'] ?>" >
+            <br><br>
+            <input type="submit">
+
+        </form>
+    </div>
+    <?php
+    // validatie
+    if (isset($_POST['email'])) {
+        if ( $_POST['email'] !== $_SESSION['email']){
+            $mail = "UPDATE login SET email = {$_POST['email']} WHERE id = {$_SESSION['id']}";
+            if ($result = mysqli_query($conn, $mail)) {
+
+                echo " YES ";
+
+            }
+        }
+
+        $_POST['email'] = htmlspecialchars($_POST['email']);
+
+
+        $to = $_POST['email'];
+        $subject = "Juicy Email";
+
+        $message = "
+        <html>
+            <head>
+                <title>Welkom in een heel nieuwe wereld</title>
+               </head>
+            <body>
+                <p>Beste " . $_SESSION['name'] . " </p>
+                <table>
+                    <tr>
+                        <th><h4> Danku voor u aan te melden voor de nieuwsbrief !</h4></th>
+                    </tr>
+                    <tr>
+                         <p> Uw email: " . $_POST["email"] . " </p>
+                    </tr>
+                </table>
+            </body>
+        </html>
+        ";
+
+        // Always set content-type when sending HTML email
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+
+    }
+
+    ?>
+
+
+    <?php
+
+    if (isset($_POST['email'])) {
+
+        $_POST['email'] = mysqli_real_escape_string($conn, $_POST['email']);
+
+
+        echo " ";
+
+        $sql = "UPDATE login SET newsletter = 1 WHERE id = {$_SESSION['id']}";
+        $_SESSION['news'] = 1;
+
+        if ($result = mysqli_query($conn, $sql)) {
+
+            echo " YES ";
+
+        } else {
+
+            echo "<p>Query kan niet gelezen worden" . mysqli_error($conn) . "</p>";
+        }
+    } else {
+        echo "";
+    }
+}else{
+?>
+        <div class="container">
+            <h2><span>Meld je aan voor de nieuwsbrief!</span></h2>
+            <div class="alert alert-light" role="alert">
+                <h5><strong>Zorg dat je ingelogd bent!</strong></h5>
+            </div>
+            <form method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
+                <label for="email">Email</label>
+                <input type="text" name="email" value="mail@ik.com" required autofocus>*
+                <br><br>
+                <input type="hidden" name="id" value="<?php $_GET['id'] ?>" >
+                <br><br>
+                <input type="submit">
+
+            </form>
+        </div>
+<?php
+}
+?>
         <footer class="footer">
             <span>Juicy3 By Emile Goeminne</span>
         </footer>
         <script src="js/dist/main.min.js"></script>
     </body>
 </html>
-<?php
-}
-?>

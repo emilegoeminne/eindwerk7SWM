@@ -28,7 +28,7 @@ function openNav() {
 });
 $(document).ready(function(){
     $('.plus-btn').on('click', function(e) {
-        console.log("Test Text");
+
         e.preventDefault();
         var $this = $(this);
         var $input = $this.closest('div').find('input');
@@ -36,6 +36,8 @@ $(document).ready(function(){
 
         if (value < 100) {
             value = value + 1;
+            console.log("Ik wil dood zo veel keer");
+            console.log(value);
         } else {
             value =100;
         }
@@ -58,5 +60,26 @@ $(document).ready(function(){
         }
 
         $input.val(value);
+    });
+});
+$(document).ready(function(){
+    // image gallery
+    // init the state from the input
+    $(".image-checkbox").each(function () {
+        if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
+            $(this).addClass('image-checkbox-checked');
+        }
+        else {
+            $(this).removeClass('image-checkbox-checked');
+        }
+    });
+
+    // sync the state to the input
+    $(".image-checkbox").on("click", function (e) {
+        $(this).toggleClass('image-checkbox-checked');
+        var $checkbox = $(this).find('input[type="checkbox"]');
+        $checkbox.prop("checked",!$checkbox.prop("checked"))
+
+        e.preventDefault();
     });
 });

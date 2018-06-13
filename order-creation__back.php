@@ -1,7 +1,8 @@
 
 <?php
-session_start(); // Altijd nodig om te starten ook op andere paginasQ
 include("includes/db_conn.php");
+session_start(); // Altijd nodig om te starten ook op andere paginasQ
+
     if(!empty($_SESSION['winkelwagen'])){    
         // Escape user inputs for security
         $_POST['inputName'] = mysqli_real_escape_string($conn, $_POST['inputName']);
@@ -16,26 +17,28 @@ include("includes/db_conn.php");
         $city = $_POST['inputCity'] ;
         $country = $_POST['inputCountry'] ;
         $postcode = $_POST['inputPostcode'] ;
+        $email = $_SESSION['email'];
         $id = $_POST['id'];
-        $cart = implode(' --- ', array_keys($_SESSION['winkelwagen']));
-        $amount =  implode(' --- ', array_values($_SESSION['winkelwagen']));
+        $cart = array();
+        $amount =  array();
         $real_total = $_SESSION['rtotal'];
 
         // attempt insert query execution
-        foreach($_SESSION['winkelwagen'] as $key){
-            $sql = "INSERT INTO order_product (name, total, street, postcode, city, country, id, product_dsc, product) VALUES ('$naam', '$real_total', '$street', '$postcode', '$city', '$country', '$id', '$amount', '$cart' )";
-        } // afsluiten foreach
+        foreach($_SESSION['winkelwagen'] as $key => $val){
 
-        if(mysqli_query($conn, $sql )){
+            mysqli_query($conn, $sql = "INSERT INTO order_product (name, total, street, postcode, city, country, id, amount, product, email) VALUES ('$naam', '$real_total', '$street', '$postcode', '$city', '$country', '$id', '$val', '$key', '$email')");
+            $_SESSION['lastId'] [$_POST['insertId']] = mysqli_insert_id($conn);
             echo "Records added successfully.";
-            header("Location:index.php");
-            exit;
-        } else{
+        } // afsluiten foreach
+        header("Location:order-payment.php");
+        unset($_SESSION['winkelwagen']);
+        exit;
+        if(!mysqli_query($conn, $sql)){
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
         }
     }else{
         header("Location:error.php");
     }
     // close connection
-mysqli_close($conn);
-?>
+    mysqli_close($conn);
+    ?>

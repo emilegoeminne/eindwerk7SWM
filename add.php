@@ -6,7 +6,7 @@ if(!isset($_SESSION['name']) && !$_SESSION['rank'] == 2){
     header("Location:index.php");
     exit;
 }
-    if(isset($_POST['naam']) && isset($_POST['description']) && isset($_POST['tags']) && isset($_POST['prijs'])){
+    if(isset($_POST['naam'])&&isset($_POST['description'])&&isset($_POST['tags'])&&isset($_POST['waardering'])){
         // Escape user inputs for security
         $_POST['naam'] = mysqli_real_escape_string($conn, $_POST['naam']);
         $_POST['description'] = mysqli_real_escape_string($conn, $_POST['description']);
@@ -31,6 +31,8 @@ if(!isset($_SESSION['name']) && !$_SESSION['rank'] == 2){
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
         }
     // close connection
+    }else{
+        echo "ERROR: Could not able to execute " . mysqli_error($conn);
     }
 mysqli_close($conn);
 ?>
