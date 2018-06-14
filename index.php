@@ -50,6 +50,9 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
                                     <li>
                                         <a href="admin.php">Admin</a>
                                     </li>
+                                    <li>
+                                        <a href="orders-admin.php">Order Admin</a>
+                                    </li>
                                     <?php
                                         }
                                         if(!isset($_SESSION['name'])){
@@ -62,6 +65,12 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
                                     ?>
                                     <li>
                                         <a href="uitlog.php">Uitloggen</a>
+                                    </li>
+                                    <li>
+                                        <a href="orders.php">Orders</a>
+                                    </li>
+                                    <li>
+                                        <a href="nieuwsbrief.php">Newsletter</a>
                                     </li>
                                     <?php
                                         }
@@ -107,36 +116,42 @@ session_start(); // Altijd nodig om te starten ook op andere paginas
                             while ($rij = mysqli_fetch_array($result)) {
                                 if($rij['product_id'] == 19 || $rij['product_id'] == 21){
                                     echo "
-                                    <div class='row align-items-center'>
-                                        <div class=\"col align-items-left\">
-                                            <img class='img-100' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak Banaan\" >
+                                    <form action=\"add_to_cart.php\" method=\"post\">
+                                        <div class='row align-items-center'>
+                                            <div class=\"col align-items-left\">
+                                                <img class='img-100' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak Banaan\" >
+                                            </div>
+                
+                                            <div class='col products'>
+                                                <h3>{$rij['naam']}</h3>
+                                                <p>{$rij['description']}</p>
+                                                <button type=\"submit\" name=\"toevoegen\" class=\"btn btn-underline\"><a>Bestel</a></button>
+                                                <input type=\"hidden\" name=\"amount\" value=\"1\" required >
+                                                <input type=\"hidden\" name=\"product_id\" value=\"{$rij['product_id']}\" >
+                                                <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
+                                            </div>
                                         </div>
-            
-                                        <div class='col products'>
-                                            <h3>{$rij['naam']}</h3>
-                                            <p>{$rij['description']}</p>
-                                            <button type=\"button\" class=\"btn btn-underline\"><a href=\"order-creation.php\">Bestel</a></button>
-                                            <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
-                                        </div>
-                                    </div>";
+                                     </form>";
                                 }else{
                                     echo "
-                                    <div class='row usp align-items-center'>
-            
-                                        <div class='col products'>
-                                            <h3>{$rij['naam']}</h3>
-                                            <p>{$rij['description']}</p>
-                                            <button type=\"button\" class=\"btn btn-underline\"><a href=\"order-single.php\">Bestel</a></button>
-                                            <input type=\"hidden\" name=\"product_id\" value=\"{$rij['product_id']}\" >
-                                             <input type=\"hidden\" name=\"amount\" value=\"1\">
-                                            <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
+                                    <form action=\"add_to_cart.php\" method=\"post\">
+                                        <div class='row usp align-items-center'>
+                
+                                            <div class='col products'>
+                                                <h3>{$rij['naam']}</h3>
+                                                <p>{$rij['description']}</p>
+                                                <button type=\"submit\" name=\"toevoegen\" class=\"btn btn-underline\"><a>Bestel</a></button>
+                                                <input type=\"hidden\" name=\"amount\" value=\"1\" required >
+                                                <input type=\"hidden\" name=\"product_id\" value=\"{$rij['product_id']}\" >
+                                                <button type=\"button\" class=\"btn btn-underline\"><a href=\"detail.php?product_id={$rij['product_id']}\">Meer Info</a></button>
+                                            </div>
+    
+                                            <div class=\"col\">
+                                                <img class='img-100 align-items-right ' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak Banaan\" >
+                                            </div>
+    
                                         </div>
-
-                                        <div class=\"col\">
-                                            <img class='img-100 align-items-right ' src=\"images/{$rij['foto']}\" alt=\"Fles van de smaak Banaan\" >
-                                        </div>
-
-                                    </div>";
+                                    </form>";
                                 }  
                                 
                             }

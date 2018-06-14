@@ -29,18 +29,26 @@
         //gebruik Arial 16pt Vet
         $pdf->SetFont('Arial','B',16);
         //plaats de tekst
-        $pdf->Cell(40,10,'FAKTOER '.$rij['id']);
+        $pdf->SetXY(60,10);
+        $pdf->Cell(40,10,'FACTUUR VOOR BESTELLING '.$rij['id']);
         //plaats het logo
-        $pdf->Image("images/viso.png", 10, 20, 40, 40);
+        $pdf->Image("images/logo.png", 100, 30, 10, 20);
         //volgend tekstkader
-        $pdf->SetXY(10,80);
+        $pdf->SetXY(95,80);
         $pdf->SetFont('Arial','B',10);
-        $pdf->Cell(40,10,'Factuur'.$rij['id']);
+        $pdf->Cell(40,10,'Factuur '.$rij['id']);
         $pdf->SetFont('Arial','',10);
         //volgend tekstkader
         $pdf->SetXY(10,100);
-        $pdf->Cell(40,10,'Betaal ke '.$rij['total'].' euro');
+        $pdf->Cell(40,10,'Op naam van '.$rij['name']);
+        $pdf->SetXY(10,120);
+        $pdf->Cell(50,10,'Af te leveren op '.$rij['street'].' '.$rij['postcode'].' '.$rij['city'].' '.$rij['country']);
+        $pdf->SetXY(10,140);
+        $pdf->Cell(50,10,'Product nummer '.$rij['product']);
+        $pdf->SetXY(10,160);
+        $pdf->Cell(50,10,'Hoeveelheid : '.$rij['amount']);
         $pdf->SetFont('Arial','B',10);
+        $pdf->SetXY(150,180);
         $pdf->Cell(50,10,'Te betalen : '.$rij['total'].' euro');
 
         //open het PDF-bestand

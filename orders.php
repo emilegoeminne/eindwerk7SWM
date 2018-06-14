@@ -33,40 +33,60 @@
                     <div id="mySidenav" class="sidenav">
                         <a href="#" class="closebtn" id="btnCloseNav">&times;</a>
                         <div class="mobile-menu-items">
+
                             <ul>
                                 <li><a href="index.php">Home</a></li>
                                 <li><a href="products.php">Producten</a></li>
                                 <li><a href="contact.php">Contact</a></li>
-                                <li><img src="images/cart.png" class="cart" alt="Winkelmand voor knop Koop nu">
-                                    <button type="button" class="btnUnderline"><a class="buy">Koop nu</a></button>
-                                </li>
+                                <li><img src="images/cart.png" class="cart" alt="Winkelmand voor knop Koop nu"><button type="button" class="btnUnderline"><a class="buy">Koop nu</a></button></li>
                                 <?php
-                                if (isset($_SESSION['name']) && $_SESSION['rank'] == 2) {
+                                if(isset($_SESSION['name']) && $_SESSION['rank'] == 2){
                                     ?>
                                     <li>
                                         <a href="toevoegen.php">Toevoegen</a>
                                     </li>
+                                    <li>
+                                        <a href="admin.php">Admin</a>
+                                    </li>
+                                    <li>
+                                        <a href="orders-admin.php">Order Admin</a>
+                                    </li>
                                     <?php
                                 }
-                                if (!isset($_SESSION['name'])) {
+                                if(!isset($_SESSION['name'])){
                                     ?>
                                     <li>
                                         <a href="login.php">log in</a>
                                     </li>
                                     <?php
-                                } else if (isset($_SESSION['name']) && $_SESSION['rank'] > 0) {
+                                }else if(isset($_SESSION['name']) && $_SESSION['rank'] > 0){
                                     ?>
                                     <li>
                                         <a href="uitlog.php">Uitloggen</a>
+                                    </li>
+                                    <li>
+                                        <a href="orders.php">Orders</a>
+                                    </li>
+                                    <li>
+                                        <a href="nieuwsbrief.php">Newsletter</a>
                                     </li>
                                     <?php
                                 }
                                 ?>
                             </ul>
+
                             <div class="socials">
-                                <img src="#">
-                                <img src="#">
-                                <img src="#">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="images/logos/fb.svg">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="images/logos/ig.svg">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="images/logos/yt.svg">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
